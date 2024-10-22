@@ -907,12 +907,18 @@
           "MPCalcHub.Infrastructure": "1.0.0"
         },
         "runtime": {
-          "MPCalcHub.Application.dll": {}
+          "MPCalcHub.Application.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "MPCalcHub.Domain/1.0.0": {
         "runtime": {
-          "MPCalcHub.Domain.dll": {}
+          "MPCalcHub.Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "MPCalcHub.Infrastructure/1.0.0": {
@@ -924,7 +930,10 @@
           "Microsoft.EntityFrameworkCore.Tools": "8.0.0"
         },
         "runtime": {
-          "MPCalcHub.Infrastructure.dll": {}
+          "MPCalcHub.Infrastructure.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

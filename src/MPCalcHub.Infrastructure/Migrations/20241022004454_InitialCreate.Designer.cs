@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MPCalcHub.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20241022002110_InitialCreate")]
+    [Migration("20241022004454_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -82,7 +82,7 @@ namespace MPCalcHub.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("User", (string)null);
                 });
 #pragma warning restore 612, 618
         }

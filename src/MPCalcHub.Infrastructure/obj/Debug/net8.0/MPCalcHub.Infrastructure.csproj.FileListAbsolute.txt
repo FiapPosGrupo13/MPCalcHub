@@ -15,3 +15,21 @@ D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\ref
 D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\MPCalcHub.Infrastructure.pdb
 D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\MPCalcHub.Infrastructure.genruntimeconfig.cache
 D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\ref\MPCalcHub.Infrastructure.dll
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\bin\Debug\net8.0\MPCalcHub.Infrastructure.deps.json
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\bin\Debug\net8.0\MPCalcHub.Infrastructure.runtimeconfig.json
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\bin\Debug\net8.0\MPCalcHub.Infrastructure.dll
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\bin\Debug\net8.0\MPCalcHub.Infrastructure.pdb
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\bin\Debug\net8.0\MPCalcHub.Domain.dll
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\bin\Debug\net8.0\MPCalcHub.Domain.pdb
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\MPCalcHub.Infrastructure.csproj.AssemblyReference.cache
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\MPCalcHub.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\MPCalcHub.Infrastructure.AssemblyInfoInputs.cache
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\MPCalcHub.Infrastructure.AssemblyInfo.cs
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\MPCalcHub.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\MPCalcHub.Infrastructure.sourcelink.json
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\MPCalcHu.2B22229B.Up2Date
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\MPCalcHub.Infrastructure.dll
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\refint\MPCalcHub.Infrastructure.dll
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\MPCalcHub.Infrastructure.pdb
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\MPCalcHub.Infrastructure.genruntimeconfig.cache
+C:\Projetos\Pós Arquitetura\MPCalcHub\src\MPCalcHub.Infrastructure\obj\Debug\net8.0\ref\MPCalcHub.Infrastructure.dll

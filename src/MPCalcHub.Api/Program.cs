@@ -31,7 +31,6 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 //                      .MigrationsHistoryTable("__EFMigrationsHistory", "dbo")),
 //     ServiceLifetime.Scoped);
 
-
 //Inject all Services and repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();

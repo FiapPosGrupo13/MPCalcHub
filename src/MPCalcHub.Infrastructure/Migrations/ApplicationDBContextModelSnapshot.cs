@@ -79,7 +79,7 @@ namespace MPCalcHub.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("User", (string)null);
                 });
 #pragma warning restore 612, 618
         }

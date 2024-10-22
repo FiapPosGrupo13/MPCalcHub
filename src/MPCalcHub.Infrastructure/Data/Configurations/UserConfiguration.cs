@@ -11,7 +11,7 @@ public class UserConfiguration : BaseEntityConfiguration<User>
     {
         base.Configure(builder);
 
-        builder.ToTable("Users");
+        builder.ToTable("User");
 
         builder.Property(u => u.Name).IsRequired().HasMaxLength(100);
         builder.Property(u => u.Email).IsRequired().HasMaxLength(150);

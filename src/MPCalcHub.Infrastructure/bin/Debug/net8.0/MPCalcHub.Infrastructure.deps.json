@@ -916,7 +916,10 @@
       },
       "MPCalcHub.Domain/1.0.0": {
         "runtime": {
-          "MPCalcHub.Domain.dll": {}
+          "MPCalcHub.Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
