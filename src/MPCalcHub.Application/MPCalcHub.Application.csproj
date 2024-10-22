@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+      
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MPCalcHub.Domain\MPCalcHub.Domain.csproj" />
+    <ProjectReference Include="..\MPCalcHub.Infrastructure\MPCalcHub.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
