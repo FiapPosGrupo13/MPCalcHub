@@ -1,0 +1,11 @@
+D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Domain\bin\Debug\net8.0\MPCalcHub.Domain.deps.json
+D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Domain\bin\Debug\net8.0\MPCalcHub.Domain.dll
+D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Domain\bin\Debug\net8.0\MPCalcHub.Domain.pdb
+D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Domain\obj\Debug\net8.0\MPCalcHub.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Domain\obj\Debug\net8.0\MPCalcHub.Domain.AssemblyInfoInputs.cache
+D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Domain\obj\Debug\net8.0\MPCalcHub.Domain.AssemblyInfo.cs
+D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Domain\obj\Debug\net8.0\MPCalcHub.Domain.csproj.CoreCompileInputs.cache
+D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Domain\obj\Debug\net8.0\MPCalcHub.Domain.dll
+D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Domain\obj\Debug\net8.0\refint\MPCalcHub.Domain.dll
+D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Domain\obj\Debug\net8.0\MPCalcHub.Domain.pdb
+D:\Projects\Fiap\Meu\MPCalcHub\src\MPCalcHub.Domain\obj\Debug\net8.0\ref\MPCalcHub.Domain.dll
