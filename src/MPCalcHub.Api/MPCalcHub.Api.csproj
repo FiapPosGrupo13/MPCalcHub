@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MPCalcHub.Application\MPCalcHub.Application.csproj" />
+    <ProjectReference Include="..\MPCalcHub.Domain\MPCalcHub.Domain.csproj" />
     <ProjectReference Include="..\MPCalcHub.Infrastructure\MPCalcHub.Infrastructure.csproj" />
   </ItemGroup>
 
