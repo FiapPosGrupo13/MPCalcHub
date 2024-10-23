@@ -3,6 +3,7 @@ using MPCalcHub.Application.Interfaces;
 using MPCalcHub.Application.DataTransferObjects;
 using Microsoft.AspNetCore.Authorization;
 using MPCalcHub.Domain.Enums;
+using static MPCalcHub.Api.Constants.AppConstants;
 
 namespace MPCalcHub.Api.Controllers
 {
@@ -16,10 +17,13 @@ namespace MPCalcHub.Api.Controllers
         /// <summary>
         /// Criar um novo usuário
         /// </summary>
-        /// <param name="user">Objeto com as propriedades para criar um novo usuário<see cref="User"/></param>
-        /// <returns>Um objeto do usuaário criado <see cref="User"/></returns>
+        /// <remarks>
+        /// Obs: Não é necessário informar o Id, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy, Removed, RemovedAt, RemovedBy
+        /// </remarks>
+        /// <param name="user">Objeto com as propriedades para criar um novo usuário</param>
+        /// <returns>Um objeto do usuário criado</returns>
         [HttpPost]
-        [Authorize]
+        [Authorize(Policy = Policies.SuperUser)]
         [Produces("application/json")]
         [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
         public async Task<object> Create([FromBody] User user)

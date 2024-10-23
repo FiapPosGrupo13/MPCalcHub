@@ -13,6 +13,14 @@ namespace MPCalcHub.Api.Controllers
     [Route("accounts")]
     public class AccountController(ILogger<AccountController> logger, ITokenApplicationService _tokenApplicationService) : BaseController(logger)
     {
+        ///<summary>
+        ///Gera o token a partir de um usuário e senha
+        ///</summary>
+        /// <remarks>
+        /// Obs: É obrigatório informar o email e senha do usuário
+        /// </remarks>
+        /// <param name="userLogin">Objeto com email e senha do usuário</param>
+        /// <returns>Um token de autenticação</returns>
         [HttpPost("token")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]

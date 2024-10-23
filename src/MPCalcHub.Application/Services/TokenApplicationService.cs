@@ -42,7 +42,7 @@ namespace MPCalcHub.Application.Services
                 {
                     new Claim(ClaimTypes.Name, user.Name),
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, (user.PermissionLevel -1).ToString())
+                    new Claim(ClaimTypes.Role, ((int)user.PermissionLevel).ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(5),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

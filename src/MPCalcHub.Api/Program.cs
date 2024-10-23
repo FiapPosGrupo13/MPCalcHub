@@ -17,55 +17,65 @@ using Newtonsoft.Json.Converters;
 using System.Reflection;
 using MPCalcHub.Application.Interfaces;
 using MPCalcHub.Application.Services;
+using System.Text;
+using MPCalcHub.Domain.Enums;
+using MPCalcHub.Application.Authorization;
+using Microsoft.AspNetCore.Authorization;
+using static MPCalcHub.Api.Constants.AppConstants;
 
 var builder = WebApplication.CreateBuilder(args);
 var env = builder.Environment;
+
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddAuthentication(o =>
-    {
-        o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-        o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    })
-    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, o =>
-    {
-        o.RequireHttpsMetadata = false;
-        o.SaveToken = true;
-        o.TokenValidationParameters = new TokenValidationParameters()
-        {
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            ValidateIssuerSigningKey = false,
-            RequireExpirationTime = true,
-            ValidateLifetime = false,
-            ClockSkew = TimeSpan.Zero,
-            RequireSignedTokens = false,
-            SignatureValidator = delegate (string token, TokenValidationParameters parameters)
-            {
-                return new JwtSecurityToken(token);
-            },
-
-        };
-    });
-
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
+var jwtKeyConfig = builder.Configuration["JWT:Key"];
+if (string.IsNullOrEmpty(jwtKeyConfig))
+    throw new InvalidOperationException("JWT:Key configuration is missing or empty.");
+
+builder.Services.AddAuthentication(o =>
+{
+    o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, o =>
+{
+    o.RequireHttpsMetadata = false;
+    o.SaveToken = true;
+    o.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKeyConfig)),
+        RequireExpirationTime = true,
+        ValidateIssuer = false,
+        ValidateAudience = false,
+    };
+});
+
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(Policies.SuperUser, policy =>
+        policy.Requirements.Add(new RolesRequirement(PermissionLevel.SuperUser)));
+}).AddAuthorizationBuilder();
+
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
-                {
-                    var settings = options.SerializerSettings;
-                    settings.NullValueHandling = NullValueHandling.Ignore;
-                    settings.FloatFormatHandling = FloatFormatHandling.DefaultValue;
-                    settings.FloatParseHandling = FloatParseHandling.Double;
-                    settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                    settings.DateFormatString = "yyyy-MM-ddTHH:mm:ss";
-                    settings.Culture = new CultureInfo("en-US");
-                    settings.Converters.Add(new StringEnumConverter());
-                    settings.ContractResolver = new DefaultContractResolver() { NamingStrategy = new SnakeCaseNamingStrategy() };
-                });
+{
+    var settings = options.SerializerSettings;
+    settings.NullValueHandling = NullValueHandling.Ignore;
+    settings.FloatFormatHandling = FloatFormatHandling.DefaultValue;
+    settings.FloatParseHandling = FloatParseHandling.Double;
+    settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+    settings.DateFormatString = "yyyy-MM-ddTHH:mm:ss";
+    settings.Culture = new CultureInfo("en-US");
+    settings.Converters.Add(new StringEnumConverter());
+    settings.ContractResolver = new DefaultContractResolver() { NamingStrategy = new SnakeCaseNamingStrategy() };
+});
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -74,6 +84,12 @@ builder.Services.AddSwaggerGen(c =>
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
+
+    c.CustomSchemaIds(type => 
+    {
+        var namingStrategy = new SnakeCaseNamingStrategy();
+        return namingStrategy.GetPropertyName(type.Name, false);
+    });
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -119,10 +135,10 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
 builder.Services.AddScoped<ITokenApplicationService, TokenApplicationService>();
+builder.Services.AddSingleton<IAuthorizationHandler, RolesAuthorizationHandler>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
