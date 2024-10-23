@@ -22,14 +22,14 @@ namespace MPCalcHub.Application.DataTransferObjects
         public PermissionLevel PermissionLevel { get; set; }
 
         [JsonPropertyName("ddd")]
-        public string? DDD { get; set; }
+        public string DDD { get; set; }
 
         [JsonPropertyName("phone_number")]
-        public string? PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         public User() : base() { }
 
-        public User(Guid? id, DateTime createdAt, Guid createdBy, DateTime? updatedAt, Guid? updatedBy, bool removed, DateTime? removedAt, Guid? removedBy, string name, string email, string password, PermissionLevel permissionLevel, string? ddd, string? phoneNumber) : this()
+        public User(Guid? id, DateTime createdAt, Guid createdBy, DateTime? updatedAt, Guid? updatedBy, bool removed, DateTime? removedAt, Guid? removedBy, string name, string email, string password, PermissionLevel permissionLevel, string ddd, string phoneNumber) : this()
         {
             Id = id;
             CreatedAt = createdAt;
