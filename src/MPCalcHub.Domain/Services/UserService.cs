@@ -10,4 +10,16 @@ public class UserService(IUserRepository userRepository) : BaseService<User>(use
     {
         return await userRepository.GetById(id, false, false);
     }
+
+    public override async Task<User> Add(User entity)
+    {
+        var user = await userRepository.GetByEmail(entity.Email);
+
+        if (user != null)
+            throw new Exception("O usuário já existe.");
+
+        var xpto = await base.Add(entity);
+
+        return xpto;
+    }
 }

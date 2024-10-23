@@ -6,9 +6,9 @@ namespace MPCalcHub.Domain.Services
 {
     public abstract class BaseService<T>(IRepository<T> repository) : IBaseService<T> where T : class, IBaseEntity
     {
-        public async Task Add(T entity)
+        public virtual async Task<T> Add(T entity)
         {
-            await repository.Add(entity);
+            return await repository.Add(entity);
         }
 
         public async Task Delete(T entity)
@@ -21,9 +21,9 @@ namespace MPCalcHub.Domain.Services
             return repository.GetAll();
         }
 
-        public async Task Update(T entity)
+        public async Task<T> Update(T entity)
         {
-            await repository.Update(entity);
+           return await repository.Update(entity);
         }
 
         public void Dispose()
