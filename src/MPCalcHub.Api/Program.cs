@@ -118,6 +118,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
+builder.Services.AddScoped<ITokenApplicationService, TokenApplicationService>();
 
 var app = builder.Build();
 

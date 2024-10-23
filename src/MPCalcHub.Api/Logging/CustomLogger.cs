@@ -24,7 +24,7 @@ namespace MPCalcHub.Api.Logging
         {
             string message = $"Log de execução: {logLevel} - {eventId.Id} - {formatter(state, exception)}";
 
-            Console.WriteLine(message);
+            Console.WriteLine(message);      
         }
     }
 }

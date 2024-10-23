@@ -22,4 +22,9 @@ public class UserService(IUserRepository userRepository) : BaseService<User>(use
 
         return xpto;
     }
+
+    public async Task<User> GetByEmail(string email)
+    {
+        return await userRepository.GetByEmail(email);
+    }
 }
