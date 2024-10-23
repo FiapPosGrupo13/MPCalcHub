@@ -13,7 +13,7 @@ public class User : BaseEntity
 
     public User() : base() { }
 
-    public User(string name, string email, string password, PermissionLevel permissionLevel, string? ddd, string? phoneNumber, Guid userId) : base()
+    public User(string name, string email, string password, PermissionLevel permissionLevel, string ddd, string phoneNumber, Guid userId) : base()
     {
         Name = name;
         Email = email;
