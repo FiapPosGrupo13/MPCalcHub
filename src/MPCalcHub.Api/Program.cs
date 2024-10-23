@@ -22,6 +22,8 @@ using MPCalcHub.Domain.Enums;
 using MPCalcHub.Application.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using static MPCalcHub.Api.Constants.AppConstants;
+using MPCalcHub.Domain.Entities;
+using MPCalcHub.Application.DataTransferObjects;
 
 var builder = WebApplication.CreateBuilder(args);
 var env = builder.Environment;
@@ -116,6 +118,15 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+builder.Services.AddAutoMapper((sp, cfg) =>
+{
+    cfg.AllowNullDestinationValues = true;
+    cfg.AllowNullCollections = true;
+    cfg.ConstructServicesUsing(sp.GetService);
+}, Assembly.GetAssembly(typeof(BaseModel)));
+
+var xpto = Assembly.GetAssembly(typeof(BaseModel));
 
 builder.Logging.ClearProviders();
 builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration

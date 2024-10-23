@@ -1,24 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using MPCalcHub.Application.DataTransferObjects;
 using MPCalcHub.Application.Interfaces;
 using MPCalcHub.Domain.Interfaces;
 using EN = MPCalcHub.Domain.Entities;
 
-namespace MPCalcHub.Application.Services
+namespace MPCalcHub.Application.Services;
+
+public class UserApplicationService(
+    IUserService userService,
+    IMapper mapper) : IUserApplicationService
 {
-    public class UserApplicationService(IUserService userService) : IUserApplicationService
+    public async Task<User> Add(User model)
     {
-        public async Task<User> Add(User model)
-        {
-            var user = new EN.User(model.Name, model.Email, model.Password, model.PermissionLevel, model.DDD, model.PhoneNumber, Guid.NewGuid());
+        var user = mapper.Map<EN.User>(model);
 
-            user = await userService.Add(user);
+        user = await userService.Add(user);
 
-            return new User(user.Id, user.CreatedAt, user.CreatedBy, user.UpdatedAt, user.UpdatedBy, user.Removed, user.RemovedAt, user.RemovedBy, user.Name, user.Email, user.Password, user.PermissionLevel, user.DDD, user.PhoneNumber);
-            
-        }
+        return mapper.Map<User>(user);
+
     }
 }

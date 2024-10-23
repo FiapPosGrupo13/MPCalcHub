@@ -18,9 +18,9 @@ public class UserService(IUserRepository userRepository) : BaseService<User>(use
         if (user != null)
             throw new Exception("O usuário já existe.");
 
-        var xpto = await base.Add(entity);
-
-        return xpto;
+        entity.PrepareToInsert(Guid.NewGuid());
+        
+        return await base.Add(entity);
     }
 
     public async Task<User> GetByEmail(string email)
