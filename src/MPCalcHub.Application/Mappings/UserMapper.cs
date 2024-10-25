@@ -22,5 +22,8 @@ public class UserMapper : Profile
             .ForMember(dest => dest.UpdatedBy, opt => opt.Ignore())
             .ForMember(dest => dest.RemovedAt, opt => opt.Ignore())
             .ForMember(dest => dest.RemovedBy, opt => opt.Ignore());
+
+        CreateMap<DTO.BasicUser, User>()
+            .ConstructUsing(src => new User());
     }
 }

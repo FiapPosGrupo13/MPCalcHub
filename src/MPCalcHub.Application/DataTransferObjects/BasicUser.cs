@@ -3,7 +3,7 @@ using MPCalcHub.Domain.Enums;
 
 namespace MPCalcHub.Application.DataTransferObjects;
 
-public class User : BaseModel
+public class BasicUser
 {
     [JsonPropertyName("name")]
     public string Name { get; set; }
@@ -23,18 +23,10 @@ public class User : BaseModel
     [JsonPropertyName("phone_number")]
     public string PhoneNumber { get; set; }
 
-    public User() : base() { }
+    public BasicUser() : base() { }
 
-    public User(Guid? id, DateTime createdAt, Guid createdBy, DateTime? updatedAt, Guid? updatedBy, bool removed, DateTime? removedAt, Guid? removedBy, string name, string email, string password, PermissionLevel permissionLevel, string ddd, string phoneNumber) : this()
+    public BasicUser(string name, string email, string password, PermissionLevel permissionLevel, string ddd, string phoneNumber) : this()
     {
-        Id = id;
-        CreatedAt = createdAt;
-        CreatedBy = createdBy;
-        UpdatedAt = updatedAt;
-        UpdatedBy = updatedBy;
-        Removed = removed;
-        RemovedAt = removedAt;
-        RemovedBy = removedBy;
         Name = name;
         Email = email;
         Password = password;

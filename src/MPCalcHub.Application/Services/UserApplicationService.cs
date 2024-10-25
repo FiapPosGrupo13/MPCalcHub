@@ -10,13 +10,12 @@ public class UserApplicationService(
     IUserService userService,
     IMapper mapper) : IUserApplicationService
 {
-    public async Task<User> Add(User model)
+    public async Task<User> Add(BasicUser model)
     {
         var user = mapper.Map<EN.User>(model);
 
         user = await userService.Add(user);
 
         return mapper.Map<User>(user);
-
     }
 }
