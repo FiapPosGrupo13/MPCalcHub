@@ -1,56 +1,25 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using MPCalcHub.Application.DataTransferObjects;
 using MPCalcHub.Application.Interfaces;
 using MPCalcHub.Domain.Interfaces;
-using EN = MPCalcHub.Domain.Entities;
+using MPCalcHub.Domain.Interfaces.Security;
 
-namespace MPCalcHub.Application.Services
+namespace MPCalcHub.Application.Services;
+
+public class TokenApplicationService(IUserService userService, ITokenService tokenService) : ITokenApplicationService
 {
-    public class TokenApplicationService(IUserService userService, IConfiguration configuration) : ITokenApplicationService
+    private readonly IUserService _userService = userService;
+    private readonly ITokenService _tokenService = tokenService;
+
+    public async Task<string> GetToken(UserLogin userLogin)
     {
-        private readonly IConfiguration _configuration = configuration;
-        private readonly IUserService _userService = userService;
+        var user = await _userService.GetByEmail(userLogin.Email);
 
-        public async Task<string> GetToken(UserLogin userLogin)
-        {
-            var user = await _userService.GetByEmail(userLogin.Email);
+        if (user == null)
+            throw new Exception("Usuário não encontrado");
 
-            if (user == null)
-                throw new Exception("Usuário não encontrado");
+        if (user.Password != userLogin.Password)
+            throw new Exception("Senha inválida");
 
-            if (user.Password != userLogin.Password)
-                throw new Exception("Senha inválida");
-
-            return GenerateToken(user);
-        }
-
-        private string GenerateToken(EN.User user)
-        {
-            var jwtKey = _configuration["Jwt:Key"];
-            if (string.IsNullOrEmpty(jwtKey))
-                throw new Exception("JWT Key is not configured.");
-
-            var key = Encoding.ASCII.GetBytes(jwtKey);
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.Name),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, ((int)user.PermissionLevel).ToString())
-                }),
-                Expires = DateTime.UtcNow.AddHours(5),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
-        }
+        return _tokenService.GenerateToken(user);
     }
 }

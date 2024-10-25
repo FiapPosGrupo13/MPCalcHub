@@ -24,6 +24,9 @@ using Microsoft.AspNetCore.Authorization;
 using static MPCalcHub.Api.Constants.AppConstants;
 using MPCalcHub.Application.DataTransferObjects;
 using MPCalcHub.Infrastructure.Security;
+using MPCalcHub.Domain.Interfaces.Security;
+using MPCalcHub.Domain.Services.Security;
+using MPCalcHub.Domain.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 var env = builder.Environment;
@@ -39,6 +42,8 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnCh
 var jwtKeyConfig = builder.Configuration["JWT:Key"];
 if (string.IsNullOrEmpty(jwtKeyConfig))
     throw new InvalidOperationException("JWT:Key configuration is missing or empty.");
+
+builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("JWT"));
 
 builder.Services.AddAuthentication(o =>
 {
@@ -144,11 +149,32 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 });
 
 //Inject all Services and repositories
+
+#region Repositories
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+#endregion
+
+#region Services
+
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+#endregion
+
+#region Application Services
+
 builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
 builder.Services.AddScoped<ITokenApplicationService, TokenApplicationService>();
+
+#endregion
+
+#region Authorization
+
 builder.Services.AddSingleton<IAuthorizationHandler, RolesAuthorizationHandler>();
+
+#endregion
 
 var app = builder.Build();
 
