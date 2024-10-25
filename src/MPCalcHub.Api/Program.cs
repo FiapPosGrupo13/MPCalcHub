@@ -22,8 +22,8 @@ using MPCalcHub.Domain.Enums;
 using MPCalcHub.Application.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using static MPCalcHub.Api.Constants.AppConstants;
-using MPCalcHub.Domain.Entities;
 using MPCalcHub.Application.DataTransferObjects;
+using MPCalcHub.Infrastructure.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 var env = builder.Environment;
@@ -59,11 +59,13 @@ builder.Services.AddAuthentication(o =>
     };
 });
 
-
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy(Policies.SuperUser, policy =>
-        policy.Requirements.Add(new RolesRequirement(PermissionLevel.SuperUser)));
+    options.AddPolicyWithPermission(Policies.SuperUser, PermissionLevel.SuperUser)
+           .AddPolicyWithPermission(Policies.SuperOrModerator, PermissionLevel.SuperUser | PermissionLevel.Moderator)
+           .AddPolicyWithPermission(Policies.User, PermissionLevel.User)
+           .AddPolicyWithPermission(Policies.Guest, PermissionLevel.Guest)
+           .AddPolicyWithPermission(Policies.Banned, PermissionLevel.Banned);
 }).AddAuthorizationBuilder();
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
