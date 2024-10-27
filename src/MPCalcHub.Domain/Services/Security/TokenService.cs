@@ -31,7 +31,7 @@ public class TokenService(IOptions<TokenSettings> options) : ITokenService
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, ((int)user.PermissionLevel).ToString())
             }),
-            Expires = DateTime.UtcNow.AddHours(5),
+            Expires = DateTime.UtcNow.AddHours(_settings.ExpirationTimeHour),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
 
