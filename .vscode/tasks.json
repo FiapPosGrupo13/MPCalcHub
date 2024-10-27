@@ -31,6 +31,19 @@
 		  "isDefault": true
 		},
 		"detail": "Executa o projeto"
+	  },
+	  {
+		"label": "test",
+		"command": "dotnet",
+		"type": "process",
+		"args": [
+		  "test",
+		  "${workspaceFolder}/test/MPCalcHub.Tests/MPCalcHub.Tests.csproj",
+		  "--logger",
+		  "trx",
+		  "--results-directory",
+		  "${workspaceFolder}/test/MPCalcHub.Tests"
+		]
 	  }
 	]
   }
