@@ -25,12 +25,11 @@ public class BasicUser
 
     [JsonPropertyName("permission_level")]
     [Required(ErrorMessage = "O campo Level de Permissão é obrigatório.")]
-    [Range(0, int.MaxValue, ErrorMessage = "O valor deve ser um número positivo.")]
     public PermissionLevel PermissionLevel { get; set; }
 
     [JsonPropertyName("ddd")]
     [Required(ErrorMessage = "O campo DDD é obrigatório.")]
-    [Range(10, 99, ErrorMessage = "O número deve ter exatamente dois dígitos para um DDD válido.")]
+    [RegularExpression(@"^\d{2}$", ErrorMessage = "O DDD deve conter exatamente 2 dígitos numéricos.")]
     public string DDD { get; set; }
 
     [JsonPropertyName("phone_number")]
