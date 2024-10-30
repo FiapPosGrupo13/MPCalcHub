@@ -27,6 +27,10 @@ using MPCalcHub.Infrastructure.Security;
 using MPCalcHub.Domain.Interfaces.Security;
 using MPCalcHub.Domain.Services.Security;
 using MPCalcHub.Domain.Options;
+using MPCalcHub.Domain.Entities.Interfaces;
+using MPCalcHub.Domain.Entities;
+using MPCalcHub.Api.Filters;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 var env = builder.Environment;
@@ -73,7 +77,7 @@ builder.Services.AddAuthorization(options =>
            .AddPolicyWithPermission(Policies.Banned, PermissionLevel.Banned);
 }).AddAuthorizationBuilder();
 
-builder.Services.AddControllers().AddNewtonsoftJson(options =>
+builder.Services.AddControllers(options => options.Filters.Add<UserFilter>()).AddNewtonsoftJson(options =>
 {
     var settings = options.SerializerSettings;
     settings.NullValueHandling = NullValueHandling.Ignore;
@@ -173,6 +177,13 @@ builder.Services.AddScoped<ITokenApplicationService, TokenApplicationService>();
 #region Authorization
 
 builder.Services.AddSingleton<IAuthorizationHandler, RolesAuthorizationHandler>();
+
+#endregion
+
+#region Filters
+
+builder.Services.AddScoped<IAuthorizationFilter, UserFilter>();
+builder.Services.AddScoped(x => new UserData());
 
 #endregion
 
