@@ -1,36 +1,42 @@
+using MPCalcHub.Domain.Entities;
 using MPCalcHub.Domain.Entities.Interfaces;
 using MPCalcHub.Domain.Interfaces;
 using MPCalcHub.Domain.Interfaces.Infrastructure;
 
 namespace MPCalcHub.Domain.Services
 {
-    public abstract class BaseService<T>(IRepository<T> repository) : IBaseService<T> where T : class, IBaseEntity
+    public abstract class BaseService<T>(
+        IRepository<T> repository,
+        UserData userData) : IBaseService<T> where T : class, IBaseEntity
     {
+        protected readonly IRepository<T> _repository = repository;
+        protected readonly UserData _userData = userData;
+
         public virtual async Task<T> Add(T entity)
         {
-            return await repository.Add(entity);
+            return await _repository.Add(entity);
         }
 
         public async Task Delete(T entity)
         {
-            await repository.Delete(entity);
+            await _repository.Delete(entity);
         }
 
         public IEnumerable<T> GetAll()
         {
-            return repository.GetAll();
+            return _repository.GetAll();
         }
 
         public async Task<T> Update(T entity)
         {
-           return await repository.Update(entity);
+           return await _repository.Update(entity);
         }
 
         public void Dispose()
         {
             GC.SuppressFinalize(this);
 
-            repository.Dispose();
+            _repository.Dispose();
         }
     }
 }
