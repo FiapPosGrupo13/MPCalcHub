@@ -65,6 +65,7 @@ builder.Services.AddAuthentication(o =>
         RequireExpirationTime = true,
         ValidateIssuer = false,
         ValidateAudience = false,
+        ValidateLifetime = true
     };
 });
 
