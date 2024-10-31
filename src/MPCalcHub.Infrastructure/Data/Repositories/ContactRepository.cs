@@ -23,4 +23,9 @@ public class ContactRepository(ApplicationDBContext context) : BaseRepository<Co
 
         return Contact;
     }
+
+    public async Task<IEnumerable<Contact>> FindBy(int ddd)
+    {
+        return await FindBy(c => c.DDD == ddd).ToListAsync();
+    }
 }

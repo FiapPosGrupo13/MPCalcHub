@@ -30,7 +30,7 @@ public class BasicUser
     [JsonPropertyName("ddd")]
     [Required(ErrorMessage = "O campo DDD é obrigatório.")]
     [RegularExpression(@"^\d{2}$", ErrorMessage = "O DDD deve conter exatamente 2 dígitos numéricos.")]
-    public string DDD { get; set; }
+    public int DDD { get; set; }
 
     [JsonPropertyName("phone_number")]
     [Required(ErrorMessage = "O campo telefone é obrigatório.")]
@@ -38,14 +38,4 @@ public class BasicUser
     public string PhoneNumber { get; set; }
 
     public BasicUser() : base() { }
-
-    public BasicUser(string name, string email, string password, PermissionLevel permissionLevel, string ddd, string phoneNumber) : this()
-    {
-        Name = name;
-        Email = email;
-        Password = password;
-        PermissionLevel = permissionLevel;
-        DDD = ddd;
-        PhoneNumber = phoneNumber;
-    }
 }

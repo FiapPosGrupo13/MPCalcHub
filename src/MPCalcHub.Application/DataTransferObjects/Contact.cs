@@ -15,7 +15,7 @@ namespace MPCalcHub.Application.DataTransferObjects
         public string Name { get; set; }
 
         [JsonPropertyName("ddd")]
-        public string DDD { get; set; }
+        public int DDD { get; set; }
 
         [JsonPropertyName("phone_number")]
         public string PhoneNumber { get; set; }

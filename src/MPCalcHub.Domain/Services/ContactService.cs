@@ -1,12 +1,14 @@
+using System.ComponentModel.DataAnnotations;
 using MPCalcHub.Domain.Entities;
 using MPCalcHub.Domain.Interfaces;
 using MPCalcHub.Domain.Interfaces.Infrastructure;
 
 namespace MPCalcHub.Domain.Services;
 
-public class ContactService(IContactRepository contactRepository, UserData userData) : BaseService<Contact>(contactRepository, userData), IContactService
+public class ContactService(IContactRepository contactRepository, UserData userData, IStateDDDService stateDDDService) : BaseService<Contact>(contactRepository, userData), IContactService
 {
     private readonly IContactRepository _contactRepository = contactRepository;
+    private readonly IStateDDDService _stateDDDService = stateDDDService;
 
     public async Task<Contact> GetById(Guid id, bool include, bool tracking)
     {
@@ -24,8 +26,21 @@ public class ContactService(IContactRepository contactRepository, UserData userD
 
         if (contact != null)
             throw new Exception("O contato já existe.");
+
+        var existsDDD = await _stateDDDService.GetByDDDAsync(entity.DDD);
+        if (existsDDD == null)
+            throw new ValidationException("DDD inválido e/ou não existe.");
         
         return await base.Add(entity);
+    }
+
+    public override async Task<Contact> Update(Contact entity)
+    {
+        var existsDDD = await _stateDDDService.GetByDDDAsync(entity.DDD);
+        if (existsDDD == null)
+            throw new ValidationException("DDD inválido e/ou não existe.");
+
+        return await base.Update(entity);
     }
 
     public async Task<Contact> GetByEmail(string email)
@@ -46,8 +61,8 @@ public class ContactService(IContactRepository contactRepository, UserData userD
         await base.Remove(entity);
     }
 
-    public async Task<IEnumerable<Contact>> FindByDDD(string ddd)
+    public async Task<IEnumerable<Contact>> FindByDDD(int ddd)
     {
-        return await _contactRepository.FindBy(c => c.DDD == ddd);
+        return await _contactRepository.FindBy(ddd);
     }
 }

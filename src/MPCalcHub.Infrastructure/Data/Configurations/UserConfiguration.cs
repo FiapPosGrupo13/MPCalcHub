@@ -17,7 +17,7 @@ public class UserConfiguration : BaseEntityConfiguration<User>
         builder.Property(u => u.Email).IsRequired().HasMaxLength(150);
         builder.Property(u => u.Password).IsRequired(false).HasMaxLength(256);
         builder.Property(u => u.PermissionLevel).HasDefaultValue(PermissionLevel.Guest).HasColumnType("int");
-        builder.Property(u => u.DDD).IsRequired(false).HasMaxLength(3);
+        builder.Property(u => u.DDD).IsRequired(true);
         builder.Property(u => u.PhoneNumber).IsRequired(false).HasMaxLength(9);
     }
 }

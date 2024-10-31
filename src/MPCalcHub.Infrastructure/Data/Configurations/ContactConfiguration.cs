@@ -15,7 +15,7 @@ public class ContactConfiguration : BaseEntityConfiguration<Contact>
 
         builder.Property(u => u.Name).IsRequired().HasMaxLength(100);
         builder.Property(u => u.Email).IsRequired().HasMaxLength(150);
-        builder.Property(u => u.DDD).IsRequired(false).HasMaxLength(3);
+        builder.Property(u => u.DDD).IsRequired(true);
         builder.Property(u => u.PhoneNumber).IsRequired(false).HasMaxLength(9);
     }
 }

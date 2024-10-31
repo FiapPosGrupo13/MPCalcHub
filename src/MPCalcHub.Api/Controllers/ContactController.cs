@@ -45,7 +45,7 @@ namespace MPCalcHub.Api.Controllers
         [Authorize(Policy = Policies.SuperOrModerator)]
         [Produces("application/json")]
         [ProducesResponseType(typeof(Contact), StatusCodes.Status200OK)]
-        public async Task<object> FindByDDD([FromRoute] string ddd)
+        public async Task<object> FindByDDD([FromRoute] int ddd)
         {
             try
             {

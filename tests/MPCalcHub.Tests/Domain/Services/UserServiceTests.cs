@@ -14,7 +14,7 @@ public class UserServiceTests : BaseServiceTests
     public UserServiceTests()
     {
         _repository = new UserRepository(_context);
-        _userService = new UserService(_repository);
+        _userService = new UserService(_repository, _userData);
     }
 
     public class Insert : UserServiceTests

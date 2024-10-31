@@ -9,5 +9,5 @@ public interface IRepository<T> : IDisposable where T : class, IBaseEntity
     Task<T> Add(T entity);
     Task<T> Update(T entity);
     Task Delete(Guid id);
-    Task<IEnumerable<T>> FindBy(Expression<Func<T, bool>> expression, bool tracking = false);
+    IQueryable<T> FindBy(Expression<Func<T, bool>> expression);
 }

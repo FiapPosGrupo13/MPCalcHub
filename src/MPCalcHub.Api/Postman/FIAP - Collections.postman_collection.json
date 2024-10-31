@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "96163545-930c-459b-a6ff-014cc4570fb9",
+		"name": "FIAP - Collections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27523987"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Inser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIzZjM2NmI1Mi1iMjBjLTRlYmEtYjM2MS0yNjU1OWVmOThiOGIiLCJ1bmlxdWVfbmFtZSI6IkdhYnJpZWwiLCJlbWFpbCI6ImdhYnJpZWxsb3VyZWlyb0BvdXRsb29rLmNvbS5iciIsInJvbGUiOiIxNiIsIm5iZiI6MTcyOTgyMjc4NCwiZXhwIjoxNzI5ODQwNzg0LCJpYXQiOjE3Mjk4MjI3ODR9.s9k0tarvm1kSatcSQ8dCONbIJN3lduY9qzI5BERuT1Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Gabriel Novo\",\r\n  \"email\": \"gabriel.loureiro@teste.com.br\",\r\n  \"password\": \"1234\",\r\n  \"permission_level\": 2,\r\n  \"ddd\": \"11\",\r\n  \"phone_number\": \"595959595\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5056/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5056",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "GetToken",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"gabrielloureiro@outlook.com.br\",\r\n  \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5056/accounts/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5056",
+							"path": [
+								"accounts",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contact",
+			"item": [
+				{
+					"name": "Insert",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJmM2U3MDEyMS05YWQyLTQ3YTUtYjVmYS1lODU0ZDNkZDE0ZjYiLCJ1bmlxdWVfbmFtZSI6IkdhYnJpZWwgTG91cmVpcm8iLCJlbWFpbCI6ImdhYnJpZWxsb3VyZWlyb0BvdXRsb29rLmNvbS5iciIsInJvbGUiOiIxIiwibmJmIjoxNzMwMzQwODM1LCJleHAiOjE3MzAzNTg4MzUsImlhdCI6MTczMDM0MDgzNX0.EFlBr0myK5DUUzklvfrT0A9WSfLJyoZc5v4qzv1NDrU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"string\",\r\n  \"email\": \"string\",\r\n  \"ddd\": 0,\r\n  \"phone_number\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5056/contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5056",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
