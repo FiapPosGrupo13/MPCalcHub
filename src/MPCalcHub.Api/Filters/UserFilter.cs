@@ -11,8 +11,6 @@ public class UserFilter(UserData userData) : IAuthorizationFilter
     {
         var user = context.HttpContext.User;
 
-        
-
         if (user?.Claims?.Count() > 0)
         {
             _userData.Set(user);
