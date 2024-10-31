@@ -12,14 +12,14 @@ public class BasicContact
     public string Email { get; set; }
 
     [JsonPropertyName("ddd")]
-    public string DDD { get; set; }
+    public int DDD { get; set; }
 
     [JsonPropertyName("phone_number")]
     public string PhoneNumber { get; set; }
 
     public BasicContact() : base() { }
 
-    public BasicContact(string name, string email, string ddd, string phoneNumber) : this()
+    public BasicContact(string name, string email, int ddd, string phoneNumber) : this()
     {
         Name = name;
         Email = email;

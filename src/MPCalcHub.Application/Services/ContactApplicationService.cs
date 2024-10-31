@@ -2,15 +2,11 @@ using AutoMapper;
 using MPCalcHub.Application.DataTransferObjects;
 using MPCalcHub.Application.Interfaces;
 using MPCalcHub.Domain.Interfaces;
-using System.ComponentModel.DataAnnotations;
-using System.Linq.Expressions;
 using EN = MPCalcHub.Domain.Entities;
 
 namespace MPCalcHub.Application.Services;
 
-public class ContactApplicationService(
-    IContactService contactService,
-    IMapper mapper) : IContactApplicationService
+public class ContactApplicationService(IContactService contactService, IMapper mapper) : IContactApplicationService
 {
     private readonly IContactService _contactService = contactService;
     private readonly IMapper _mapper = mapper;
@@ -37,7 +33,7 @@ public class ContactApplicationService(
         return _mapper.Map<Contact>(contact);
     }
 
-    public async Task<IEnumerable<Contact>> FindByDDD(string ddd)
+    public async Task<IEnumerable<Contact>> FindByDDD(int ddd)
     {
         var contact = await _contactService.FindByDDD(ddd);
         return _mapper.Map<IEnumerable<Contact>>(contact);

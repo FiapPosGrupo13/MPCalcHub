@@ -17,7 +17,7 @@ public sealed class BasicUserFixtures : BaseFixtures<BasicUser>
             .RuleFor(u => u.Password, f => f.Internet.Password(9) + "#" + 1)
             .RuleFor(u => u.PermissionLevel, f => f.PickRandom<PermissionLevel>())
             .RuleFor(u => u.PhoneNumber, f => f.Phone.PhoneNumber("#########"))
-            .RuleFor(u => u.DDD, f => f.Random.Int(10, 99).ToString());
+            .RuleFor(u => u.DDD, f => f.Random.Int(10, 99));
 
         return faker.Generate();
     }

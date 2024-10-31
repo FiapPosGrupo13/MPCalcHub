@@ -48,7 +48,7 @@ namespace MPCalcHub.Domain.Services
             _repository.Dispose();
         }
 
-        public Task<IEnumerable<T>> FindBy(Expression<Func<T, bool>> expression, bool tracking = false)
+        public IQueryable<T> FindBy(Expression<Func<T, bool>> expression)
         {
             return _repository.FindBy(expression);
         }

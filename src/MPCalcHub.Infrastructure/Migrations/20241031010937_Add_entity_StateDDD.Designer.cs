@@ -4,6 +4,7 @@ using MPCalcHub.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MPCalcHub.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20241031010937_Add_entity_StateDDD")]
+    partial class Add_entity_StateDDD
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,9 +36,9 @@ namespace MPCalcHub.Infrastructure.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("DDD")
-                        .IsRequired()
-                        .HasColumnType("int");
+                    b.Property<string>("DDD")
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -76,7 +79,10 @@ namespace MPCalcHub.Infrastructure.Migrations
             modelBuilder.Entity("MPCalcHub.Domain.Entities.StateDDD", b =>
                 {
                     b.Property<int>("DDD")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DDD"));
 
                     b.Property<string>("Region")
                         .IsRequired()
@@ -104,8 +110,9 @@ namespace MPCalcHub.Infrastructure.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("DDD")
-                        .HasColumnType("int");
+                    b.Property<string>("DDD")
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
 
                     b.Property<string>("Email")
                         .IsRequired()
