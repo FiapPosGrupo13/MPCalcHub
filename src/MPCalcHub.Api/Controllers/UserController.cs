@@ -13,12 +13,11 @@ namespace MPCalcHub.Api.Controllers;
 [ApiController]
 public class UserController(ILogger<UserController> logger, IUserApplicationService userApplicationService) : BaseController(logger)
 {
+    private readonly IUserApplicationService _userApplicationService = userApplicationService;
+
     /// <summary>
     /// Criar um novo usuário
     /// </summary>
-    /// <remarks>
-    /// Obs: Não é necessário informar o Id, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy, Removed, RemovedAt, RemovedBy
-    /// </remarks>
     /// <param name="user">Objeto com as propriedades para criar um novo usuário</param>
     /// <returns>Um objeto do usuário criado</returns>
     [HttpPost]
@@ -29,7 +28,7 @@ public class UserController(ILogger<UserController> logger, IUserApplicationServ
     {
         try
         {
-            var entity = await userApplicationService.Add(user);
+            var entity = await _userApplicationService.Add(user);
             return Ok(entity);
         }
         catch (Exception ex)

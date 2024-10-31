@@ -2,6 +2,7 @@ using MPCalcHub.Domain.Entities;
 using MPCalcHub.Domain.Entities.Interfaces;
 using MPCalcHub.Domain.Interfaces;
 using MPCalcHub.Domain.Interfaces.Infrastructure;
+using System.Linq.Expressions;
 
 namespace MPCalcHub.Domain.Services
 {
@@ -14,12 +15,19 @@ namespace MPCalcHub.Domain.Services
 
         public virtual async Task<T> Add(T entity)
         {
+            entity.PrepareToInsert(_userData.Id);
             return await _repository.Add(entity);
         }
 
-        public async Task Delete(T entity)
+        public async Task Delete(Guid id)
         {
-            await _repository.Delete(entity);
+            await _repository.Delete(id);
+        }
+
+        public async Task Remove(T entity)
+        {
+            entity.PrepareToRemove(_userData.Id);
+            await _repository.Update(entity);
         }
 
         public IEnumerable<T> GetAll()
@@ -27,9 +35,10 @@ namespace MPCalcHub.Domain.Services
             return _repository.GetAll();
         }
 
-        public async Task<T> Update(T entity)
+        public virtual async Task<T> Update(T entity)
         {
-           return await _repository.Update(entity);
+            entity.PrepareToUpdate(_userData.Id);
+            return await _repository.Update(entity);
         }
 
         public void Dispose()
@@ -37,6 +46,11 @@ namespace MPCalcHub.Domain.Services
             GC.SuppressFinalize(this);
 
             _repository.Dispose();
+        }
+
+        public Task<IEnumerable<T>> FindBy(Expression<Func<T, bool>> expression, bool tracking = false)
+        {
+            return _repository.FindBy(expression);
         }
     }
 }
