@@ -12,23 +12,23 @@ public abstract class BaseEntity : Identifier, IBaseEntity
     public DateTime? RemovedAt { get; set; }
     public Guid? RemovedBy { get; set; }
 
-    public virtual void PrepareToInsert(Guid createdBy)
+    public virtual void PrepareToInsert(Guid userId)
     {
         Id = Guid.NewGuid();
         CreatedAt = DateTime.Now;
-        CreatedBy = createdBy;
+        CreatedBy = userId;
     }
 
-    public virtual void PrepareToUpdate(Guid createdBy)
+    public virtual void PrepareToUpdate(Guid userId)
     {
         UpdatedAt = DateTime.Now;
-        UpdatedBy = Guid.NewGuid();
+        UpdatedBy = userId;
     }
 
-    public virtual void PrepareToRemove(Guid createdBy)
+    public virtual void PrepareToRemove(Guid userId)
     {
         Removed = true;
         RemovedAt = DateTime.Now;
-        RemovedBy = Guid.NewGuid();
+        RemovedBy = userId;
     }
 }

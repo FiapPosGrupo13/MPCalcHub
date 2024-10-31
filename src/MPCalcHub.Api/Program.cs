@@ -157,6 +157,8 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 #region Repositories
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IContactRepository, ContactRepository>();
+
 
 #endregion
 
@@ -164,6 +166,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IContactService, ContactService>();
+
 
 #endregion
 
@@ -171,6 +175,8 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
 builder.Services.AddScoped<ITokenApplicationService, TokenApplicationService>();
+builder.Services.AddScoped<IContactApplicationService, ContactApplicationService>();
+
 
 #endregion
 

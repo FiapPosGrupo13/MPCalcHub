@@ -1,6 +1,9 @@
+using Microsoft.EntityFrameworkCore;
 using MPCalcHub.Domain.Entities;
 using MPCalcHub.Domain.Entities.Interfaces;
 using MPCalcHub.Domain.Interfaces.Infrastructure;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace MPCalcHub.Infrastructure.Data.Repositories;
 
@@ -26,9 +29,9 @@ public abstract class BaseRepository<T> : BaseExpressionService<T>, IRepository<
         return entity;
     }
 
-    public virtual async Task Delete(T entity)
+    public virtual async Task Delete(Guid id)
     {
-        Context.Remove(entity);
+        Context.Remove(id);
         await Context.SaveChangesAsync();
     }
 
@@ -43,6 +46,10 @@ public abstract class BaseRepository<T> : BaseExpressionService<T>, IRepository<
         await Context.SaveChangesAsync();
 
         return entities;
+    }
+    public async Task<IEnumerable<T>> FindBy(Expression<Func<T, bool>> expression, bool tracking = false)
+    {        
+        return Context.Set<T>().Where(expression);
     }
 
     public virtual void Dispose()
