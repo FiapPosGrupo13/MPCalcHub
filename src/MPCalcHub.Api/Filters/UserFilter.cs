@@ -15,5 +15,5 @@ public class UserFilter(UserData userData) : IAuthorizationFilter
         {
             _userData.Set(user);
         }
-    }
+    } 
 }

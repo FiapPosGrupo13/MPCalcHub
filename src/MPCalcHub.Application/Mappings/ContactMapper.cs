@@ -21,7 +21,8 @@ public class ContactMapper : Profile
             .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
             .ForMember(dest => dest.UpdatedBy, opt => opt.Ignore())
             .ForMember(dest => dest.RemovedAt, opt => opt.Ignore())
-            .ForMember(dest => dest.RemovedBy, opt => opt.Ignore());
+            .ForMember(dest => dest.RemovedBy, opt => opt.Ignore())
+            .ForMember(dest => dest.Removed, opt => opt.Ignore());
 
         CreateMap<DTO.BasicContact, Contact>()
             .ConstructUsing(src => new Contact());

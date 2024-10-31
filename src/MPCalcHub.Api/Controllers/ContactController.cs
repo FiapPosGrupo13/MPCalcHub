@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MPCalcHub.Application.DataTransferObjects;
 using MPCalcHub.Application.Interfaces;
@@ -11,26 +10,25 @@ namespace MPCalcHub.Api.Controllers
     /// Contact controller
     /// </summary>
     [Route("contacts")]
-    public class ContactController(ILogger<ContactController> logger, IContactApplicationService ContactApplicationService) : BaseController(logger)
+    public class ContactController(ILogger<ContactController> logger, IContactApplicationService contactApplicationService) : BaseController(logger)
     {
+        private readonly IContactApplicationService _contactApplicationService = contactApplicationService;
+
         /// <summary>
         /// Criar um novo contato
         /// </summary>
-        /// <remarks>
-        /// Obs: Não é necessário informar o Id, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy, Removed, RemovedAt, RemovedBy
-        /// </remarks>
-        /// <param name="contact">Objeto com as propriedades para criar um novo contato</param>
+        /// <param name="model">Objeto com as propriedades para criar um novo contato</param>
         /// <returns>Um objeto do contato criado</returns>
         [HttpPost]
-        //[Authorize(Policy = Policies.SuperOrModerator)]
+        [Authorize(Policy = Policies.SuperOrModerator)]
         [Produces("application/json")]
         [ProducesResponseType(typeof(Contact), StatusCodes.Status200OK)]
-        public async Task<object> Create([FromBody] BasicContact contact)
+        public async Task<object> Create([FromBody] BasicContact model)
         {
             try
             {
-                var entity = await ContactApplicationService.Add(contact);
-                return Ok(entity);
+                var contact = await _contactApplicationService.Add(model);
+                return Ok(contact);
             }
             catch (Exception ex)
             {
@@ -41,21 +39,18 @@ namespace MPCalcHub.Api.Controllers
         /// <summary>
         /// Buscar contatos por DDD
         /// </summary>
-        /// <remarks>
-        /// Obs: Não é necessário informar o Id, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy, Removed, RemovedAt, RemovedBy
-        /// </remarks>
         /// <param name="ddd">DDD para busca de contatos</param>
         /// <returns>Um objeto do contato criado</returns>
-        [HttpGet("find")]
-        // [Authorize(Policy = Policies.SuperOrModerator)]
+        [HttpGet("find/{ddd}")]
+        [Authorize(Policy = Policies.SuperOrModerator)]
         [Produces("application/json")]
         [ProducesResponseType(typeof(Contact), StatusCodes.Status200OK)]
-        public async Task<object> Get([FromQuery] string ddd)
+        public async Task<object> FindByDDD([FromRoute] string ddd)
         {
             try
             {
-                var entity = await ContactApplicationService.FindBy(c => c.DDD == ddd);
-                return Ok(entity); 
+                var contacts = await _contactApplicationService.FindByDDD(ddd);
+                return Ok(contacts);
             }
             catch (Exception ex)
             {
@@ -64,19 +59,19 @@ namespace MPCalcHub.Api.Controllers
         }
 
         /// <summary>
-        /// Excluir contato
+        /// Excluir um contato pelo Id
         /// </summary>
-        /// <param name="contactId">Id do contato</param>
+        /// <param name="id">Id do contato</param>
         /// <returns>Contato excluído com sucesso</returns>
         [HttpDelete]
-        //[Authorize(Policy = Policies.SuperOrModerator)]
+        [Authorize(Policy = Policies.SuperOrModerator)]
         [Produces("application/json")]
         [ProducesResponseType(typeof(Contact), StatusCodes.Status200OK)]
-        public object Delete(Guid contactId)
+        public async Task<object> Delete([FromQuery] Guid id)
         {
             try
             {
-                ContactApplicationService.Remove(contactId);
+                await _contactApplicationService.Remove(id);
                 return Accepted();
             }
             catch (Exception ex)
@@ -88,28 +83,23 @@ namespace MPCalcHub.Api.Controllers
         /// <summary>
         /// Editar um contato
         /// </summary>
-        /// <remarks>
-        /// Obs: Não é necessário informar o Id, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy, Removed, RemovedAt, RemovedBy
-        /// </remarks>
-        /// <param name="contact">Objeto com as propriedades para editar um contato</param>
+        /// <param name="model">Objeto com as propriedades para editar um contato</param>
         /// <returns>Um objeto do contato criado</returns>
         [HttpPut]
         //[Authorize(Policy = Policies.SuperOrModerator)]
         [Produces("application/json")]
         [ProducesResponseType(typeof(Contact), StatusCodes.Status200OK)]
-        public async Task<object> Update([FromBody] Contact contact)
+        public async Task<object> Update([FromBody] Contact model)
         {
             try
             {
-                var entity = await ContactApplicationService.Update(contact);
-                return Ok();
+                var contact = await _contactApplicationService.Update(model);
+                return Ok(contact);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
     }
-
 }

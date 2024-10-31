@@ -9,40 +9,48 @@ using EN = MPCalcHub.Domain.Entities;
 namespace MPCalcHub.Application.Services;
 
 public class ContactApplicationService(
-    IContactService ContactService,
+    IContactService contactService,
     IMapper mapper) : IContactApplicationService
 {
+    private readonly IContactService _contactService = contactService;
+    private readonly IMapper _mapper = mapper;
 
     public async Task<Contact> Add(BasicContact model)
     {
-        var Contact = mapper.Map<EN.Contact>(model);
+        var contact = _mapper.Map<EN.Contact>(model);
 
-        Contact = await ContactService.Add(Contact);
+        contact = await _contactService.Add(contact);
 
-        return mapper.Map<Contact>(Contact);
+        return _mapper.Map<Contact>(contact);
     }
 
     public async Task<Contact> Update(Contact model)
     {
-        var Contact = mapper.Map<EN.Contact>(model);
+        var contact = await _contactService.GetById(model.Id.Value, include: false, tracking: true);
+        if (contact == null)
+            throw new Exception("O contato não existe.");
+            
+        _mapper.Map(model, contact);
 
-        Contact = await ContactService.Update(Contact);
+        contact = await _contactService.Update(contact);
 
-        return mapper.Map<Contact>(Contact);
+        return _mapper.Map<Contact>(contact);
     }
 
-    public async Task<IEnumerable<Contact>> FindBy(Expression<Func<EN.Contact, bool>> expression)
+    public async Task<IEnumerable<Contact>> FindByDDD(string ddd)
     {
-        return mapper.Map<IEnumerable<Contact>>(await ContactService.FindBy(expression));
+        var contact = await _contactService.FindByDDD(ddd);
+        return _mapper.Map<IEnumerable<Contact>>(contact);
     }
 
     public async Task<Contact> GetById(Guid id)
     {
-        return mapper.Map<Contact>(await ContactService.GetById(id));
+        var contact = await _contactService.GetById(id, include: false, tracking: false);
+        return _mapper.Map<Contact>(contact);
     }
 
     public async Task Remove(Guid id)
     {
-        await ContactService.Remove(id);
+        await _contactService.Remove(id);
     }
 }

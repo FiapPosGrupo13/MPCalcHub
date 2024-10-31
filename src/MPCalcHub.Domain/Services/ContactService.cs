@@ -6,12 +6,15 @@ namespace MPCalcHub.Domain.Services;
 
 public class ContactService(IContactRepository contactRepository, UserData userData) : BaseService<Contact>(contactRepository, userData), IContactService
 {
-
     private readonly IContactRepository _contactRepository = contactRepository;
 
     public async Task<Contact> GetById(Guid id, bool include, bool tracking)
     {
         var entity = await _contactRepository.GetById(id, include, tracking);
+
+        if (entity == null)
+            throw new Exception("O contato não existe.");
+
         return entity;
     }
 
@@ -27,27 +30,24 @@ public class ContactService(IContactRepository contactRepository, UserData userD
 
     public async Task<Contact> GetByEmail(string email)
     {
-        return await _contactRepository.GetByEmail(email);
-    }
-
-    public async Task<Contact> Update(Contact entity)
-    {
-        var contact = await _contactRepository.GetById(entity.Id);
-
-        if (contact == null)
+        var entity = await _contactRepository.GetByEmail(email);
+        if (entity == null)
             throw new Exception("O contato não existe.");
 
-        return await base.Update(entity);
+        return entity; 
     }
 
     public async Task Remove(Guid id)
     {
-        var entity = await GetById(id, false, true);
+        var entity = await _contactRepository.GetById(id, false, true);
+        if (entity == null)
+            throw new Exception("O contato não existe.");
+
         await base.Remove(entity);
     }
 
-    public Task<Contact> GetById(Guid id)
+    public async Task<IEnumerable<Contact>> FindByDDD(string ddd)
     {
-        throw new NotImplementedException();
+        return await _contactRepository.FindBy(c => c.DDD == ddd);
     }
 }

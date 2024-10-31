@@ -7,7 +7,6 @@
         public string PhoneNumber { get; set; }
         public string DDD { get; set; }
 
-
         public Contact() : base() { }
 
         public Contact(string name, string email, string password, string ddd, string phoneNumber, Guid userId) : base()

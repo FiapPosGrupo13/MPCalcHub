@@ -35,7 +35,7 @@ namespace MPCalcHub.Domain.Services
             return _repository.GetAll();
         }
 
-        public async Task<T> Update(T entity)
+        public virtual async Task<T> Update(T entity)
         {
             entity.PrepareToUpdate(_userData.Id);
             return await _repository.Update(entity);
