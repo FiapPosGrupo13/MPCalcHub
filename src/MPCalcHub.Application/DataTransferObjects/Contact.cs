@@ -1,6 +1,7 @@
 ﻿using MPCalcHub.Domain.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -17,10 +18,14 @@ namespace MPCalcHub.Application.DataTransferObjects
         [JsonPropertyName("ddd")]
         public int DDD { get; set; }
 
+        [Phone(ErrorMessage = "O número de telefone inserido não é válido.")]
+        [Required(ErrorMessage = "O campo de telefone é obrigatório.")]
         [JsonPropertyName("phone_number")]
         public string PhoneNumber { get; set; }
 
         [JsonPropertyName("email")]
+        [Required(ErrorMessage = "O campo de e-mail é obrigatório.")]
+        [EmailAddress(ErrorMessage = "O e-mail inserido não é válido.")]
         public string Email { get; set; }
 
         public Contact() : base() { }
