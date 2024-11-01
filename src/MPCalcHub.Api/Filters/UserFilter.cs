@@ -17,11 +17,13 @@ public class UserFilter(UserData userData, IMemoryCache cache) : IAuthorizationF
             return;
         
         var user = context.HttpContext.User;
-
         var userId = user?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
         if (string.IsNullOrEmpty(userId))
+        {
+            context.Result = new UnauthorizedResult();
             return;
+        }
 
         if (_cache.TryGetValue(Guid.Parse(userId), out string? userCache) && user?.Claims?.Count() > 0)
             _userData.Set(user);
