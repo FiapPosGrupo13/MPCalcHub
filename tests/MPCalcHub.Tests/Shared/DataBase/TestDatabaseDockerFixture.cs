@@ -4,12 +4,12 @@ using MPCalcHub.Infrastructure.Data;
 
 namespace MPCalcHub.Tests.Shared.DataBase;
 
-public class TestDatabaseFixture : IDisposable
+public class TestDatabaseDockerFixture : IDisposable
 {
     public ApplicationDBContext DbContext { get; private set; }
     private readonly SqlDockerSetup _sqlDockerSetup;
 
-    public TestDatabaseFixture()
+    public TestDatabaseDockerFixture()
     {
         _sqlDockerSetup = new SqlDockerSetup();  // Inicia o Docker
         var serviceProvider = new ServiceCollection()
@@ -19,6 +19,7 @@ public class TestDatabaseFixture : IDisposable
 
         DbContext = serviceProvider.GetService<ApplicationDBContext>()!;
 
+        DbContext.Database.EnsureDeleted();
         DbContext.Database.EnsureCreated();
     }
 

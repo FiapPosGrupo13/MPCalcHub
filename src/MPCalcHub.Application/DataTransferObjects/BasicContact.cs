@@ -7,19 +7,24 @@ namespace MPCalcHub.Application.DataTransferObjects;
 public class BasicContact
 {
     [JsonPropertyName("name")]
+    [Required(ErrorMessage = "O campo nome √© obrigat√≥rio.")]
+    [StringLength(100, MinimumLength = 2, ErrorMessage = "O nome deve ter entre 2 e 100 caracteres.")]
+    [RegularExpression(@"^[a-zA-Z√Ä-√ø\s'-]+$", ErrorMessage = "O nome pode conter apenas letras e espa√ßos.")]
     public string Name { get; set; }
 
     [JsonPropertyName("ddd")]
+    [Required(ErrorMessage = "O campo DDD √© obrigat√≥rio.")]
+    [RegularExpression(@"^\d{2}$", ErrorMessage = "O DDD deve conter exatamente 2 d√≠gitos num√©ricos.")]
     public int DDD { get; set; }
 
-    [Phone(ErrorMessage = "O n˙mero de telefone inserido n„o È v·lido.")]
-    [Required(ErrorMessage = "O campo de telefone È obrigatÛrio.")]
+    [Phone(ErrorMessage = "O n√∫mero de telefone inserido n√£o √© v√°lido.")]
+    [Required(ErrorMessage = "O campo de telefone √© obrigat√≥rio.")]
     [JsonPropertyName("phone_number")]
     public string PhoneNumber { get; set; }
 
     [JsonPropertyName("email")]
-    [Required(ErrorMessage = "O campo de e-mail È obrigatÛrio.")]
-    [EmailAddress(ErrorMessage = "O e-mail inserido n„o È v·lido.")]
+    [Required(ErrorMessage = "O campo de e-mail √© obrigat√≥rio.")]
+    [EmailAddress(ErrorMessage = "O e-mail inserido n√£o √© v√°lido.")]
     public string Email { get; set; }
 
     public BasicContact() : base() { }

@@ -15,7 +15,7 @@ public class ContactService(IContactRepository contactRepository, UserData userD
         var entity = await _contactRepository.GetById(id, include, tracking);
 
         if (entity == null)
-            throw new Exception("O contato não existe.");
+            throw new ValidationException("O contato não existe.");
 
         return entity;
     }
@@ -25,7 +25,7 @@ public class ContactService(IContactRepository contactRepository, UserData userD
         var contact = await _contactRepository.GetById(entity.Id);
 
         if (contact != null)
-            throw new Exception("O contato já existe.");
+            throw new ValidationException("O contato já existe.");
 
         var existsDDD = await _stateDDDService.GetByDDDAsync(entity.DDD);
         if (existsDDD == null)

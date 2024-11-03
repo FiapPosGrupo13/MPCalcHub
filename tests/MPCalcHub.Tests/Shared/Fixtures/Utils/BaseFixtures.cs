@@ -13,4 +13,4 @@ public class BaseFixtures<T> : IDisposable where T : class
 }
 
 [CollectionDefinition("BaseFixtures Collection")]
-public class BaseFixtures2Collection : ICollectionFixture<BaseFixtures<object>> { }
+public class BaseFixturesCollection : ICollectionFixture<BaseFixtures<object>> { }

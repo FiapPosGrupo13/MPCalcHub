@@ -32,7 +32,7 @@ public abstract class BaseRepository<T>(ApplicationDBContext context) : BaseExpr
 
     public virtual IEnumerable<T> GetAll()
     {
-        return Context.Set<T>().ToList();
+        return Context.Set<T>().Where(x => x.Removed == false).ToList();
     }
 
     public async Task<IEnumerable<T>> AddRange(IEnumerable<T> entities)
@@ -45,7 +45,7 @@ public abstract class BaseRepository<T>(ApplicationDBContext context) : BaseExpr
 
     public virtual IQueryable<T> FindBy(Expression<Func<T, bool>> expression)
     {        
-        return Context.Set<T>().Where(expression).AsQueryable();
+        return Context.Set<T>().Where(expression).Where(x => x.Removed == false).AsQueryable();
     }
 
     public virtual void Dispose()

@@ -63,11 +63,11 @@ namespace MPCalcHub.Api.Controllers
         /// </summary>
         /// <param name="id">Id do contato</param>
         /// <returns>Contato excluído com sucesso</returns>
-        [HttpDelete]
+        [HttpDelete, Route("{id}")]
         [Authorize(Policy = Policies.SuperOrModerator)]
         [Produces("application/json")]
         [ProducesResponseType(typeof(Contact), StatusCodes.Status200OK)]
-        public async Task<object> Delete([FromQuery] Guid id)
+        public async Task<object> Delete([FromRoute] Guid id)
         {
             try
             {
