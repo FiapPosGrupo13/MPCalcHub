@@ -10,14 +10,14 @@
 			"name": "Users",
 			"item": [
 				{
-					"name": "Inser",
+					"name": "Insert",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIzZjM2NmI1Mi1iMjBjLTRlYmEtYjM2MS0yNjU1OWVmOThiOGIiLCJ1bmlxdWVfbmFtZSI6IkdhYnJpZWwiLCJlbWFpbCI6ImdhYnJpZWxsb3VyZWlyb0BvdXRsb29rLmNvbS5iciIsInJvbGUiOiIxNiIsIm5iZiI6MTcyOTgyMjc4NCwiZXhwIjoxNzI5ODQwNzg0LCJpYXQiOjE3Mjk4MjI3ODR9.s9k0tarvm1kSatcSQ8dCONbIJN3lduY9qzI5BERuT1Y",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJmM2U3MDEyMS05YWQyLTQ3YTUtYjVmYS1lODU0ZDNkZDE0ZjYiLCJ1bmlxdWVfbmFtZSI6IkdhYnJpZWwgTG91cmVpcm8iLCJlbWFpbCI6ImdhYnJpZWxsb3VyZWlyb0BvdXRsb29rLmNvbS5iciIsInJvbGUiOiIxIiwibmJmIjoxNzMwNjU0MTc2LCJleHAiOjE3MzA2NzIxNzYsImlhdCI6MTczMDY1NDE3Nn0.8MJRg9OjGMy79u1kI2fh_9XwqD8gBQDfsPzQS_HGXDM",
 									"type": "string"
 								}
 							]
@@ -32,7 +32,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Gabriel Novo\",\r\n  \"email\": \"gabriel.loureiro@teste.com.br\",\r\n  \"password\": \"1234\",\r\n  \"permission_level\": 2,\r\n  \"ddd\": \"11\",\r\n  \"phone_number\": \"595959595\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Gabriel Novo Teste Novo Novo\",\r\n  \"email\": \"gabriel.loureiro_teste_novo_novo@teste.com.br\",\r\n  \"password\": \"@Abc1234\",\r\n  \"permission_level\": 2,\r\n  \"ddd\": \"11\",\r\n  \"phone_number\": \"595959595\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -109,7 +109,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJmM2U3MDEyMS05YWQyLTQ3YTUtYjVmYS1lODU0ZDNkZDE0ZjYiLCJ1bmlxdWVfbmFtZSI6IkdhYnJpZWwgTG91cmVpcm8iLCJlbWFpbCI6ImdhYnJpZWxsb3VyZWlyb0BvdXRsb29rLmNvbS5iciIsInJvbGUiOiIxIiwibmJmIjoxNzMwMzQwODM1LCJleHAiOjE3MzAzNTg4MzUsImlhdCI6MTczMDM0MDgzNX0.EFlBr0myK5DUUzklvfrT0A9WSfLJyoZc5v4qzv1NDrU",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJmM2U3MDEyMS05YWQyLTQ3YTUtYjVmYS1lODU0ZDNkZDE0ZjYiLCJ1bmlxdWVfbmFtZSI6IkdhYnJpZWwgTG91cmVpcm8iLCJlbWFpbCI6ImdhYnJpZWxsb3VyZWlyb0BvdXRsb29rLmNvbS5iciIsInJvbGUiOiIxIiwibmJmIjoxNzMwNjU1MjUzLCJleHAiOjE3MzA2NzMyNTMsImlhdCI6MTczMDY1NTI1M30.-EdMOTXNf0hExjwBmiDxbAVjJ2Nxf0SfulaGtKmervU",
 									"type": "string"
 								}
 							]
@@ -118,7 +118,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"string\",\r\n  \"email\": \"string\",\r\n  \"ddd\": 0,\r\n  \"phone_number\": \"string\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Gab Lou \",\r\n  \"email\": \"gab.lou@teste.com.br\",\r\n  \"ddd\": 13,\r\n  \"phone_number\": \"959595954\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -134,6 +134,126 @@
 							"port": "5056",
 							"path": [
 								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJmM2U3MDEyMS05YWQyLTQ3YTUtYjVmYS1lODU0ZDNkZDE0ZjYiLCJ1bmlxdWVfbmFtZSI6IkdhYnJpZWwgTG91cmVpcm8iLCJlbWFpbCI6ImdhYnJpZWxsb3VyZWlyb0BvdXRsb29rLmNvbS5iciIsInJvbGUiOiIxIiwibmJmIjoxNzMwNjUwMDI2LCJleHAiOjE3MzA2NjgwMjYsImlhdCI6MTczMDY1MDAyNn0.mdQGXOZ0mfJauvplR5kS1NnBYIKpMG6yWuZDjQ8yHTU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Gab Lou \",\r\n  \"email\": \"gab.lou@teste.com.br\",\r\n  \"ddd\": 13,\r\n  \"phone_number\": \"959595954\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5056/contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5056",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJmM2U3MDEyMS05YWQyLTQ3YTUtYjVmYS1lODU0ZDNkZDE0ZjYiLCJ1bmlxdWVfbmFtZSI6IkdhYnJpZWwgTG91cmVpcm8iLCJlbWFpbCI6ImdhYnJpZWxsb3VyZWlyb0BvdXRsb29rLmNvbS5iciIsInJvbGUiOiIxIiwibmJmIjoxNzMwNjU1NDk3LCJleHAiOjE3MzA2NzM0OTcsImlhdCI6MTczMDY1NTQ5N30.4kcltaXFiAHBIGihGx5tIm9fz2DiBI0gUlVmKuAkm_8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Gab Lou \",\r\n  \"email\": \"gab.lou@teste.com.br\",\r\n  \"ddd\": 13,\r\n  \"phone_number\": \"959595954\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5056/contacts/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5056",
+							"path": [
+								"contacts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6a31fb70-793c-4eda-a8b1-7b7c7b21ecc9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By DDD",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJmM2U3MDEyMS05YWQyLTQ3YTUtYjVmYS1lODU0ZDNkZDE0ZjYiLCJ1bmlxdWVfbmFtZSI6IkdhYnJpZWwgTG91cmVpcm8iLCJlbWFpbCI6ImdhYnJpZWxsb3VyZWlyb0BvdXRsb29rLmNvbS5iciIsInJvbGUiOiIxIiwibmJmIjoxNzMwNjU1NjI4LCJleHAiOjE3MzA2NzM2MjgsImlhdCI6MTczMDY1NTYyOH0.TJ1yvPSAfZsUV6MLw-ASCj0QjYQX7jqGlnBD2fnF9wA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5056/contacts/find/:ddd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5056",
+							"path": [
+								"contacts",
+								"find",
+								":ddd"
+							],
+							"variable": [
+								{
+									"key": "ddd",
+									"value": "11"
+								}
 							]
 						}
 					},
