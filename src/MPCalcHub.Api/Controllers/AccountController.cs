@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MPCalcHub.Api.Filters;
 using MPCalcHub.Application.DataTransferObjects;
 using MPCalcHub.Application.Interfaces;
 
@@ -17,6 +18,7 @@ namespace MPCalcHub.Api.Controllers
         /// <returns>Um token de autenticação</returns>
         [HttpPost("token")]
         [Produces("application/json")]
+        [SkipUserFilter]
         [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
         public async Task<object> GetToken([FromBody] UserLogin userLogin)
         {

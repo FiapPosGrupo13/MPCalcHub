@@ -153,6 +153,8 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.EnableSensitiveDataLogging();
 });
 
+builder.Services.AddMemoryCache();
+
 //Inject all Services and repositories
 
 #region Repositories
