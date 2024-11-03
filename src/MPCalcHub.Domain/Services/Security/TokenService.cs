@@ -16,10 +16,12 @@ public class TokenService(IOptions<TokenSettings> options, IMemoryCache cache) :
     private readonly TokenSettings _settings = options.Value;
     private readonly IMemoryCache _cache = cache;
 
-    public string GenerateToken(User user)
+    public string GenerateToken(User user, bool force = false)
     {
-        if (_cache.TryGetValue(user.Id, out string token))
+        if (_cache.TryGetValue(user.Id, out string token) && force == false)
             return token;
+        else
+            _cache.Remove(user.Id);
 
         token = CreateToken(user);
 
@@ -40,7 +42,7 @@ public class TokenService(IOptions<TokenSettings> options, IMemoryCache cache) :
         if (string.IsNullOrEmpty(jwtKey))
             throw new Exception("JWT Key is not configured.");
 
-        var key = Encoding.ASCII.GetBytes(jwtKey);
+        var key = Convert.FromBase64String(jwtKey);
         var tokenHandler = new JwtSecurityTokenHandler();
         var tokenDescriptor = new SecurityTokenDescriptor
         {

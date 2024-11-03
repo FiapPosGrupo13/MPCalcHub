@@ -9,7 +9,6 @@ using MPCalcHub.Infrastructure.Data;
 using MPCalcHub.Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using Newtonsoft.Json;
 using System.Globalization;
 using Newtonsoft.Json.Serialization;
@@ -27,7 +26,6 @@ using MPCalcHub.Infrastructure.Security;
 using MPCalcHub.Domain.Interfaces.Security;
 using MPCalcHub.Domain.Services.Security;
 using MPCalcHub.Domain.Options;
-using MPCalcHub.Domain.Entities.Interfaces;
 using MPCalcHub.Domain.Entities;
 using MPCalcHub.Api.Filters;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -61,7 +59,7 @@ builder.Services.AddAuthentication(o =>
     o.TokenValidationParameters = new TokenValidationParameters()
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKeyConfig)),
+        IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(jwtKeyConfig)),
         RequireExpirationTime = true,
         ValidateIssuer = false,
         ValidateAudience = false,
@@ -137,8 +135,6 @@ builder.Services.AddAutoMapper((sp, cfg) =>
     cfg.AllowNullCollections = true;
     cfg.ConstructServicesUsing(sp.GetService);
 }, Assembly.GetAssembly(typeof(BaseModel)));
-
-var xpto = Assembly.GetAssembly(typeof(BaseModel));
 
 builder.Logging.ClearProviders();
 builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
