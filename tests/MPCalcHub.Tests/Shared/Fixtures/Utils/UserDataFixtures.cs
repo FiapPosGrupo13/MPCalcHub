@@ -1,3 +1,4 @@
+using Bogus;
 using MPCalcHub.Domain.Entities;
 
 namespace MPCalcHub.Tests.Shared.Fixtures.Utils;
@@ -6,13 +7,12 @@ public class UserDataFixtures : BaseFixtures<UserData>
 {
     public static UserData GenerateUserData()
     {
-        var userData = Faker.
-            RuleFor(u => u.Id, f => f.Random.Guid()).
-            RuleFor(u => u.Email, f => f.Person.Email).
-            RuleFor(u => u.Name, f => f.Person.FullName).
-            Generate();
+        var faker = new Faker<UserData>("pt_BR")
+            .RuleFor(u => u.Id, f => f.Random.Guid())
+            .RuleFor(u => u.Email, f => f.Person.Email)
+            .RuleFor(u => u.Name, f => f.Person.FullName);
 
-        return userData;
+        return faker.Generate();
     }
 
     public static UserData CreateAs_Base()
