@@ -42,7 +42,7 @@ namespace MPCalcHub.Api.Controllers
         /// <param name="ddd">DDD para busca de contatos</param>
         /// <returns>Um objeto do contato criado</returns>
         [HttpGet("find/{ddd}")]
-        [Authorize(Policy = Policies.SuperOrModerator)]
+        [Authorize(Policy = Policies.SuperOrGuest)]
         [Produces("application/json")]
         [ProducesResponseType(typeof(Contact), StatusCodes.Status200OK)]
         public async Task<object> FindByDDD([FromRoute] int ddd)
@@ -86,7 +86,7 @@ namespace MPCalcHub.Api.Controllers
         /// <param name="model">Objeto com as propriedades para editar um contato</param>
         /// <returns>Um objeto do contato criado</returns>
         [HttpPut]
-        //[Authorize(Policy = Policies.SuperOrModerator)]
+        [Authorize(Policy = Policies.SuperOrModerator)]
         [Produces("application/json")]
         [ProducesResponseType(typeof(Contact), StatusCodes.Status200OK)]
         public async Task<object> Update([FromBody] Contact model)

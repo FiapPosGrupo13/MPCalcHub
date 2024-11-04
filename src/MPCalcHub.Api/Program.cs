@@ -73,7 +73,8 @@ builder.Services.AddAuthorization(options =>
            .AddPolicyWithPermission(Policies.SuperOrModerator, PermissionLevel.SuperUser | PermissionLevel.Moderator)
            .AddPolicyWithPermission(Policies.User, PermissionLevel.User)
            .AddPolicyWithPermission(Policies.Guest, PermissionLevel.Guest)
-           .AddPolicyWithPermission(Policies.Banned, PermissionLevel.Banned);
+           .AddPolicyWithPermission(Policies.Banned, PermissionLevel.Banned)
+           .AddPolicyWithPermission(Policies.SuperOrGuest, PermissionLevel.SuperUser | PermissionLevel.Guest);
 }).AddAuthorizationBuilder();
 
 builder.Services.AddControllers(options => options.Filters.Add<UserFilter>()).AddNewtonsoftJson(options =>

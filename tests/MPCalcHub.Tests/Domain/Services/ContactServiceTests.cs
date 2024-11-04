@@ -115,11 +115,11 @@ public class ContactServiceTests : BaseServiceTests
         {
             // Arrange
             var dddFilter = 12;
-            // var contact1 = ContactFixtures.CreateAs_Base();
+            var contact1 = ContactFixtures.CreateAs_Base();
             var contact2 = ContactFixtures.CreateAs_Base();
             contact2.DDD = dddFilter;
 
-            await _context.AddRangeAsync(contact2);
+            await _context.AddRangeAsync(contact1, contact2);
 
             await SaveChanges();
 
