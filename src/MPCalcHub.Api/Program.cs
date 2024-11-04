@@ -16,7 +16,6 @@ using Newtonsoft.Json.Converters;
 using System.Reflection;
 using MPCalcHub.Application.Interfaces;
 using MPCalcHub.Application.Services;
-using System.Text;
 using MPCalcHub.Domain.Enums;
 using MPCalcHub.Application.Authorization;
 using Microsoft.AspNetCore.Authorization;
@@ -33,9 +32,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 var builder = WebApplication.CreateBuilder(args);
 var env = builder.Environment;
 
-
 // Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -152,7 +149,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 
 builder.Services.AddMemoryCache();
 
-//Inject all Services and repositories
+// Inject all Services and repositories
 
 #region Repositories
 

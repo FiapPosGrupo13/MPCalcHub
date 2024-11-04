@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using MPCalcHub.Application.Interfaces;
 using MPCalcHub.Domain.Entities;
 using MPCalcHub.Domain.Options;
-using MPCalcHub.Infrastructure.Extensions;
+using MPCalcHub.Infrastructure.Helper;
 
 namespace MPCalcHub.Api.Filters;
 
@@ -35,7 +35,7 @@ public class UserFilter(UserData userData, ITokenApplicationService tokenApplica
             _userData.Set(TokenHelper.GetUserData(token, _settings.Key));
             var timeUntilExpiration = TokenHelper.GetTimeUntilExpiration(token, _settings.Key);
 
-            if (timeUntilExpiration.HasValue && timeUntilExpiration.HasValue && timeUntilExpiration.Value.TotalMinutes <= 5)
+            if (timeUntilExpiration.HasValue && timeUntilExpiration.Value.TotalMinutes <= 5)
             {
                 token = await _tokenApplicationService.GetTokenByAutorization(_userData.Email);
                 context.HttpContext.Response.Cookies.Append("AuthToken", token);

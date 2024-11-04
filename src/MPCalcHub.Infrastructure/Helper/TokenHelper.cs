@@ -3,7 +3,7 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using MPCalcHub.Domain.Entities;
 
-namespace MPCalcHub.Infrastructure.Extensions;
+namespace MPCalcHub.Infrastructure.Helper;
 
 public class TokenHelper
 {
