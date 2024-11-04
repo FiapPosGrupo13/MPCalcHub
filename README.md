@@ -19,17 +19,15 @@ Este é um projeto de pós-graduação em Arquitetura de Software, desenvolvido 
 
 O projeto abordará os seguintes tópicos:
 
+** Fase 1
 1. **Novidades do .NET 8 e C# 12**
 2. **Desenvolvimento de API com .NET**
 3. **Middlewares e Injeção de Dependência**
 4. **Trabalhando com Logs**
 5. **Serialização de Dados em JSON e MessagePack**
 6. **Autenticação e Autorização**
-7. **Persistência de Dados com Dapper**
-8. **Documentação de API**
-9. **Trabalhando com Cache**
-10. **Explorando Minimal API**
-11. **Middlewares e Injeção de Dependência com Minimal API**
+7. **Documentação de API**
+8. **Trabalhando com Cache**
 
 ## Integrantes do Grupo 13
 
