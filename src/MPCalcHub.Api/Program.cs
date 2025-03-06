@@ -28,6 +28,7 @@ using MPCalcHub.Domain.Options;
 using MPCalcHub.Domain.Entities;
 using MPCalcHub.Api.Filters;
 using Microsoft.AspNetCore.Mvc.Filters;
+using MPCalcHub.Infrastructure.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 var env = builder.Environment;
@@ -156,6 +157,9 @@ builder.Services.AddMemoryCache();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IStateDDDRepository, StateDDDRepository>();
+builder.Services.AddScoped<IRabbitMQConnectionFactory, RabbitMQConnectionFactory>();
+builder.Services.AddScoped<IRabbitMQConsumer, RabbitMQConsumer>();
+builder.Services.AddScoped<IRabbitMQProducer, RabbitMQProducer>();
 
 #endregion
 
@@ -165,6 +169,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IStateDDDService, StateDDDService>();
+builder.Services.AddScoped<IQueueBackgroundService, QueueBackgroundService>();
+
 
 #endregion
 
@@ -173,6 +179,21 @@ builder.Services.AddScoped<IStateDDDService, StateDDDService>();
 builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
 builder.Services.AddScoped<ITokenApplicationService, TokenApplicationService>();
 builder.Services.AddScoped<IContactApplicationService, ContactApplicationService>();
+builder.Services.AddScoped<IQueueBackgroundApplicationService, QueueBackgroundApplicationService>();
+
+
+// Registra o factory de conexão RabbitMQ como singleton
+builder.Services.AddSingleton<IRabbitMQConnectionFactory>(sp =>
+{
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    return new RabbitMQConnectionFactory(configuration, sp.GetRequiredService<ILogger<RabbitMQConnectionFactory>>());
+});
+
+// Registra os serviços RabbitMQ como scoped
+builder.Services.AddScoped<IRabbitMQProducer, RabbitMQProducer>();
+builder.Services.AddScoped<IRabbitMQConsumer, RabbitMQConsumer>();
+builder.Services.AddScoped<IQueueBackgroundApplicationService, QueueBackgroundApplicationService>();
+
 
 #endregion
 

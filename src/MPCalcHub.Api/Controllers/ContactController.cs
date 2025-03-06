@@ -10,9 +10,10 @@ namespace MPCalcHub.Api.Controllers
     /// Contact controller
     /// </summary>
     [Route("contacts")]
-    public class ContactController(ILogger<ContactController> logger, IContactApplicationService contactApplicationService) : BaseController(logger)
+    public class ContactController(ILogger<ContactController> logger, IContactApplicationService contactApplicationService, IQueueBackgroundApplicationService queueBackgroundApplicationService) : BaseController(logger)
     {
         private readonly IContactApplicationService _contactApplicationService = contactApplicationService;
+        private readonly IQueueBackgroundApplicationService _queueBackgroundApplicationService = queueBackgroundApplicationService;
 
         /// <summary>
         /// Criar um novo contato
@@ -27,7 +28,7 @@ namespace MPCalcHub.Api.Controllers
         {
             try
             {
-                var contact = await _contactApplicationService.Add(model);
+                var contact = await _queueBackgroundApplicationService.EnqueueContactInsertAsync(model);
                 return Ok(contact);
             }
             catch (Exception ex)
@@ -93,7 +94,7 @@ namespace MPCalcHub.Api.Controllers
         {
             try
             {
-                var contact = await _contactApplicationService.Update(model);
+                var contact = await _queueBackgroundApplicationService.EnqueueContactUpdateAsync(model);
                 return Ok(contact);
             }
             catch (Exception ex)
